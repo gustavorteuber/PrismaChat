@@ -1,0 +1,20 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(
+    at right top,
+    rgb(17, 24, 39),
+    rgb(243, 244, 246),
+    rgb(17, 24, 39)
+  );
+}
