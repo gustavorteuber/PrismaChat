@@ -1,11 +1,11 @@
-import { IUserRepository } from "../repositories/ChatRepository"
+import { IUserRepository } from "../repositories/IChatRepository"
 
 export default class SignUpUseCase {
     constructor(readonly userRepository: IUserRepository) {
         
     }
 
-    async execute(request: any, response: any) {
+    async execute(request: any, response: any) { 
         const { name, username, password, confirmPassword } = request.body
 
         const user = await this.userRepository.getUserByUsername(username)

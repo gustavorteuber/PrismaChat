@@ -1,17 +1,22 @@
+import { MysqlDatabaseAdapter } from "./infra/database/MysqlDatabaseAdapter";
 import ExpressAdapter from "./infra/http/ExpressAdapter";
 
 export class App {
     private readonly ExpressAdapter: ExpressAdapter
+    private readonly MysqlAdapter: MysqlDatabaseAdapter
     constructor () {
         this.ExpressAdapter = new ExpressAdapter()
+        this.MysqlAdapter = new MysqlDatabaseAdapter()
     }
 
     async start () {
         this.ExpressAdapter.listen(8888)
+        this.MysqlAdapter.connect()
     }
 
     async stop () {
         this.ExpressAdapter.close()
+        this.MysqlAdapter.disconnect()
     }
 }
 
