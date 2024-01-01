@@ -12,6 +12,7 @@ export class MysqlDatabaseAdapter implements IDatabase {
   }
 
   async connect (): Promise<void> {
+    console.log(envDbConstants);
     const databaseConfig: mysql.PoolOptions = {
       ...envDbConstants,
       namedPlaceholders: true,
