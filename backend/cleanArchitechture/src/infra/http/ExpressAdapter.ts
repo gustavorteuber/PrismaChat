@@ -7,21 +7,22 @@ export default class ExpressAdapter implements IHttpServer {
         this.app.use(express.json())
     }
 
-    listen(port: number) {
-        this.app.listen(port)
-        console.log(`Server listening on port ${port}`)
-    }
-
-    on (method: string, url: string, callback: (req: Request, res: Response, next: NextFunction) => void) {
+    on (method: string, url: string, callback: (...args: any) => any): void {
         this.app[method](url, async (req: Request, res: Response, next: NextFunction) => {
-            try {
-                const output = await callback(req, res, next);
-                res.json(output);
-            } catch (error: any) {   
-                next(error);
-            }
+          try {
+            const output = await callback(req, res, next);
+            res.json(output);
+          } catch (error: any) {
+            next(error);
+          }
         });
-    }
+      }
+    
+      listen (port: number): void {
+        this.app.listen(port);
+        console.log('Escutando a porta: ', port);
+      }
+    
     close() {
         this.app.close()
     }
